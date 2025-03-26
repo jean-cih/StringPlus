@@ -1,4 +1,4 @@
-#include "../lib/s21_string.h"
+#include "../s21_string.h"
 #include "s21_test_string.h"
 
 START_TEST(build) { ck_assert_int_eq(1, 1); }

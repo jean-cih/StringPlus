@@ -8,22 +8,19 @@ FILES_LIB = lib/s21_memchr.c lib/s21_memcmp.c lib/s21_memcpy.c lib/s21_memset.c 
 
 FILES_S_ADDIT = lib/s21_to_upper.c lib/s21_to_lower.c lib/s21_insert.c lib/s21_trim.c lib/s21_sprintf.c lib/s21_sprintf_flags.c lib/s21_sscanf.c lib/s21_strcpy.c
 
-GCOV_FLAGS = -fprofile-arcs -ftest-coverage
-
-CHECK_FLAGS = -lcheck -lsubunit -lrt -lpthread -lm -lgcov
+CHECK_FLAGS = -lcheck -lsubunit -lrt -lpthread -lm
 
 all: clean s21_string.a
 
 s21_string.a: s21_string.o
 	ar r s21_string.a *.o
-	mv s21_string.a lib
 	rm -f *.o
 
 s21_string.o:
-	@$(GCC) $(GCOV_FLAGS) -c $(FILES_LIB) $(FILES_S_ADDIT)
+	@$(GCC) -c $(FILES_LIB) $(FILES_S_ADDIT)
 
-test: s21_string.a test.o
-	@$(GCC) -o test *.o -Llib -l:s21_string.a $(CHECK_FLAGS)
+test: s21_string.o test.o
+	@$(GCC) -o test *.o $(CHECK_FLAGS)
 	@./test
 	@rm *.o
 
@@ -31,9 +28,15 @@ test.o:
 	@$(GCC) -c $(FILES_TESTS) $(FILES_TESTS_ADDIT) 
 
 clean:
-	rm -f lib/s21_string.a test
+	rm -f *.a test gcov_test
 	rm -f *.o *.gcda *.gcno
 	rm -rf report
+
+gcov_test: test.o
+	@$(GCC) -c $(FILES_LIB) $(FILES_S_ADDIT) --coverage
+	ar r s21_string_gcov.a s21_*.o
+	@gcc $(FILES_TESTS) $(FILES_TESTS_ADDIT) -o gcov_test -L. -l:s21_string_gcov.a $(CHECK_FLAGS) -lgcov
+	@./gcov_test
 
 gcov_report:
 	rm -rf report

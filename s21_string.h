@@ -3,16 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdarg.h>
-#include <stdbool.h>
 #include <math.h>
-#include <locale.h>
 #include <wchar.h>
-#include <limits.h>
-#include <ctype.h>
-#include "s21_sprintf.h"
-#include "s21_sscanf.h"
+#include "lib/s21_sprintf.h"
+#include "lib/s21_sscanf.h"
 
 
 #define S21_NULL (void*)0

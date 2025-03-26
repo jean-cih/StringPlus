@@ -1,4 +1,4 @@
-#include "../lib/s21_string.h"
+#include "../s21_string.h"
 #include "s21_test_string.h"
 
 START_TEST(eq_string) { ck_assert_str_eq(strerror(_i), s21_strerror(_i)); }

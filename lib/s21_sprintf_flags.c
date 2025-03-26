@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 int parser_flags(const char **flag_form) {
   int flag_s = 0;

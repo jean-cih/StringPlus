@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 #ifdef __APPLE__
 #define MIN 0

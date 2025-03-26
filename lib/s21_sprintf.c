@@ -1,4 +1,4 @@
-#include "s21_string.h"
+#include "../s21_string.h"
 
 int s21_sprintf(char *str, const char *format, ...) {
   char *str_copy = (char *)calloc(MAX_BUFFER_SIZE, sizeof(char));
